@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Np Store</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#f4f6fb;
+}
+header{
+    background:#6c7ae0;
+    color:white;
+    padding:35px;
+    text-align:center;
+}
+nav{
+    background:#222;
+    padding:12px;
+    text-align:center;
+}
+nav a{
+    color:white;
+    margin:0 15px;
+    text-decoration:none;
+}
+.categories{
+    text-align:center;
+    padding:20px;
+}
+.categories button{
+    padding:10px 18px;
+    margin:5px;
+    border:none;
+    border-radius:20px;
+    background:#6c7ae0;
+    color:white;
+    cursor:pointer;
+}
+.categories button.active{
+    background:#4a55c7;
+}
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:20px;
+    padding:20px;
+}
+.product{
+    background:white;
+    padding:15px;
+    border-radius:14px;
+    text-align:center;
+    box-shadow:0 6px 14px rgba(0,0,0,.12);
+}
+.product img{
+    width:100%;
+    height:190px;
+    object-fit:contain;
+}
+.stars{
+    color:#ccc;
+    margin:5px 0;
+}
+.product button{
+    padding:6px 14px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>👟 Np Store</h1>
+<p>Infinite Shoe Gallery</p>
+</header>
+
+<nav>
+<a href="#">Home</a>
+<a href="#">🛒 Cart (<span id="cartCount">0</span>)</a>
+</nav>
+
+<div class="categories">
+<button class="active" onclick="filterCategory('all',this)">All</button>
+<button onclick="filterCategory('sneakers',this)">Sneakers</button>
+<button onclick="filterCategory('boots',this)">Boots</button>
+<button onclick="filterCategory('sandals',this)">Sandals</button>
+<button onclick="filterCategory('heels',this)">Heels</button>
+</div>
+
+<div class="products" id="productBox"></div>
+
+<script>
+const shoes = [
+{n:"Running Sneakers",p:79,c:"sneakers",i:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600"},
+{n:"Sport Sneakers",p:85,c:"sneakers",i:"https://images.unsplash.com/photo-1606813909355-d1a6c0d5a52b?w=600"},
+{n:"Casual Sneakers",p:69,c:"sneakers",i:"https://images.unsplash.com/photo-1528701800489-20be3c1ea4bb?w=600"},
+{n:"White Sneakers",p:72,c:"sneakers",i:"https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=600"},
+{n:"Street Sneakers",p:78,c:"sneakers",i:"https://images.unsplash.com/photo-1519744346363-dc42a3d40f07?w=600"},
+
+{n:"Leather Boots",p:129,c:"boots",i:"https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=600"},
+{n:"Winter Boots",p:139,c:"boots",i:"https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600"},
+{n:"Brown Boots",p:119,c:"boots",i:"https://images.unsplash.com/photo-1601924357840-3a7c9b4c7f4b?w=600"},
+{n:"Classic Boots",p:134,c:"boots",i:"https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=600"},
+
+{n:"Casual Sandals",p:49,c:"sandals",i:"https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600"},
+{n:"Beach Sandals",p:39,c:"sandals",i:"https://images.unsplash.com/photo-1593032465175-481ac7f401d6?w=600"},
+{n:"Flip Flops",p:29,c:"sandals",i:"https://images.unsplash.com/photo-1600180758890-6c3bba1b5a93?w=600"},
+{n:"Comfort Sandals",p:44,c:"sandals",i:"https://images.unsplash.com/photo-1606813909355-5e7dfc77a0ae?w=600"},
+
+{n:"High Heels",p:99,c:"heels",i:"https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600"},
+{n:"Red Heels",p:109,c:"heels",i:"https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?w=600"},
+{n:"Party Heels",p:119,c:"heels",i:"https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=600"},
+{n:"Stylish Heels",p:105,c:"heels",i:"https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=600"}
+];
+
+let index=0;
+let load=6;
+let current="all";
+let cart=0;
+
+function loadShoes(){
+    const box=document.getElementById("productBox");
+    for(let i=0;i<load && index<shoes.length;i++,index++){
+        const s=shoes[index];
+        if(current!=="all" && s.c!==current){i--;continue;}
+        box.innerHTML+=`
+        <div class="product">
+            <img src="${s.i}">
+            <div class="stars">★★★★★</div>
+            <h3>${s.n}</h3>
+            <p>$${s.p}</p>
+            <button onclick="addCart()">Add to Cart</button>
+        </div>`;
+    }
+}
+
+function filterCategory(cat,btn){
+    current=cat;
+    index=0;
+    document.getElementById("productBox").innerHTML="";
+    document.querySelectorAll(".categories button").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    loadShoes();
+}
+
+function addCart(){
+    cart++;
+    document.getElementById("cartCount").innerText=cart;
+}
+
+window.addEventListener("scroll",()=>{
+    if(window.innerHeight+window.scrollY>=document.body.offsetHeight-50){
+        loadShoes();
+    }
+});
+
+loadShoes();
+</script>
+
+</body>
+</html>
