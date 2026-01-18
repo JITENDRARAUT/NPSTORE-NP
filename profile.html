@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Np Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- For icons -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        header a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-left: 1rem;
+        }
+        header a:hover {
+            text-decoration: underline;
+        }
+        .profile-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+            margin: 2rem auto;
+            flex-grow: 1;
+        }
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .profile-header h2 {
+            color: #667eea;
+            font-size: 1.8rem;
+        }
+        .auth-section {
+            text-align: center;
+        }
+        .auth-section h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        .auth-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .auth-form .input-group {
+            position: relative;
+            margin: 1rem 0;
+        }
+        .auth-form input {
+            width: 100%;
+            padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        .auth-form input:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+        .auth-form .input-group i {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+        }
+        .auth-form button {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-top: 1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .auth-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .auth-section p {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+        .auth-section a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .auth-section a:hover {
+            text-decoration: underline;
+        }
+        .profile-section {
+            margin-bottom: 2rem;
+        }
+        .profile-section h3 {
+            color: #667eea;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 0.5rem;
+        }
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        .info-item label {
+            font-weight: bold;
+        }
+        .info-item span {
+            color: #666;
+        }
+        .edit-mode .info-item input {
+            width: 60%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .edit-mode .info-item span {
+            display: none;
+        }
+        .edit-mode .info-item input {
+            display: inline-block;
+        }
+        .buttons {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .buttons button {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin: 0.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .buttons button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .buttons .logout {
+            background: #dc3545;
+        }
+        .buttons .logout:hover {
+            background: #c82333;
+        }
+        .order-history {
+            list-style: none;
+            padding: 0;
+        }
+        .order-history li {
+            background: #f9f9f9;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .order-history li h4 {
+            margin: 0;
+            color: #333;
+        }
+        .order-history li p {
+            margin: 0.5rem 0;
+            color: #666;
+        }
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+        }
+        @media (max-width: 768px) {
+            .profile-container {
+                padding: 1.5rem;
+                max-width: 90%;
+            }
+            header h1 {
+                font-size: 1.5rem;
+            }
+            .info-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .edit-mode .info-item input {
+                width: 100%;
+            }
+            .auth-form {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-shoe-prints"></i> Np Store</h1>
+        <a href="index.html"><i class="fas fa-home"></i> Back to Home</a>
+    </header>
+    <div class="profile-container">
+        <div class="profile-header">
+            <h2><i class="fas fa-user-circle"></i> My Profile</h2>
+            <p id="profile-subtitle">Manage your account details and view your order history.</p>
+        </div>
+        <div id="auth-content" style="display: none;">
+            <div class="auth-section">
+                <h3>Please Log In or Sign Up</h3>
+                <p>To access your profile, please authenticate below.</p>
+                <div id="login-form" class="auth-form">
+                    <h4>Login</h4>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="login-email" placeholder="Email Address" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="login-password" placeholder="Password" required>
+                    </div>
+                    <button onclick="handleLogin()">Login</button>
+                    <p><a href="#" onclick="toggleAuth('signup')">Don't have an account? Sign Up</a></p>
+                </div>
+                <div id="signup-form" class="auth-form" style="display: none;">
+                    <h4>Sign Up</h4>
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="signup-name" placeholder="Full Name" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="signup-email" placeholder="Email Address" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="signup-password" placeholder="Password" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="signup-confirm" placeholder="Confirm Password" required>
+                    </div>
+                    <button onclick="handleSignup()">Sign Up</button>
+                    <p><a href="#" onclick="toggleAuth('login')">Already have an account? Login</a></p>
+                </div>
+            </div>
+        </div>
+        <div id="profile-content" style="display: none;">
+            <div class="profile-section">
+                <h3>Personal Information</h3>
+                <div class="profile-info" id="profile-info">
+                    <div class="info-item">
+                        <label>Full Name:</label>
+                        <span id="user-name">John Doe</span>
+                        <input type="text" id="edit-name" value="John Doe" style="display: none;">
+                    </div>
+                    <div class="info-item">
+                        <label>Email:</label>
+                        <span id="user-email">john.doe@example.com</span>
+                        <input type="email" id="edit-email" value="john.doe@example.com" style="display: none;">
+                    </div>
+                    <div class="info-item">
+                        <label>Phone:</label>
+                        <span id="user-phone">(123) 456-7890</span>
+                        <input type="tel" id="edit-phone" value="(123) 456-7890" style="display: none;">
+                    </div>
+                    <div class="info-item">
+                        <label>Address:</label>
+                        <span id="user-address">123 Shoe Lane, City, State</span>
+                        <input type="text" id="edit-address" value="123 Shoe Lane, City, State" style="display: none;">
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button id="edit-btn" onclick="toggleEdit()">Edit Profile</button>
+                    <button onclick="changePassword()">Change Password</button>
+                    <button class="logout" onclick="logout()">Logout</button>
+                </div>
+            </div>
+            <div class="profile-section">
+                <h3>Order History</h3>
+                <ul class="order-history">
+                    <li>
+                        <h4>Order #12345</h4>
+                        <p>Running Sneakers - $79.99 | Delivered on Oct 15, 2023</p>
+                    </li>
+                    <li>
+                        <h4>Order #12346</h4>
+                        <p>Leather Boots - $129.99 | Shipped on Nov 5, 2023</p>
+                    </li>
+                    <li>
+                        <h4>Order #12347</h4>
+                        <p>Casual Sandals - $49.99 | Delivered on Dec 1, 2023</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2023 Np Store. All rights reserved.</p>
+    </footer>
+    <script>
+        let isEditing = false;
+
+        function checkAuth() {
+            const loggedIn = localStorage.getItem('loggedIn');
+            if (loggedIn) {
+                document.getElementById('auth-content').style.display = 'none';
+                document.getElementById('profile-content').style.display = 'block';
+                document.getElementById('profile-subtitle').textContent = 'Manage your account details and view your order history.';
+            } else {
+                document.getElementById('auth-content').style.display = 'block';
+                document.getElementById('profile-content').style.display = 'none';
+                document.getElementById('profile-subtitle').textContent = 'Please log in or sign up to access your profile.';
+            }
+        }
+
+        function toggleAuth(type) {
+            document.getElementById('login-form').style.display = type === 'login' ? 'block' : 'none';
+            document.getElementById('signup-form').style.display = type === 'signup' ? 'block' : 'none';
+        }
+
+        function handleLogin() {
+            // Mock login - in real app, validate credentials
+            localStorage.setItem('loggedIn', 'true');
+            alert('Login successful!');
+            checkAuth();
+        }
+
+        function handleSignup() {
+            // Mock signup - in real app, register user
+            localStorage.setItem('loggedIn', 'true');
+            alert('Sign up successful!');
+            checkAuth();
+        }
+
+        function toggleEdit() {
+            const container = document.getElementById('profile-info');
+            const editBtn = document.getElementById('edit-btn');
+            if (isEditing) {
+                // Save changes (mock)
+                document.getElementById('user-name').textContent = document.getElementById('edit-name').value;
+                document.getElementById('user-email').textContent = document.getElementById('edit-email').value;
+                document.getElementById('user-phone').textContent = document.getElementById('edit-phone').value;
+                document.getElementById('user-address').textContent = document.getElementById('edit-address').value;
+                container.classList.remove('edit-mode');
+                editBtn.textContent = 'Edit Profile';
+                alert('Profile updated successfully!');
+            } else {
+                container.classList.add('edit-mode');
+                editBtn.textContent = 'Save Changes';
+            }
+            isEditing = !isEditing;
+        }
+
+        function changePassword() {
+            alert('Password change feature not implemented yet. (Mock)');
+        }
+
+        function logout() {
+            localStorage.removeItem('loggedIn');
+            alert('Logged out successfully!');
+            checkAuth();
+        }
+
+        // Initialize on page load
+        checkAuth();
+    </script>
+</body>
+</html>
