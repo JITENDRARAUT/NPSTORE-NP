@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Np Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- For icons -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        header a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-left: 1rem;
+        }
+        header a:hover {
+            text-decoration: underline;
+        }
+        .login-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            margin: auto;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .login-container h2 {
+            margin-bottom: 1.5rem;
+            color: #667eea;
+            font-size: 1.8rem;
+        }
+        .login-container .input-group {
+            position: relative;
+            margin: 1rem 0;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        .login-container input:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+        .login-container .input-group i {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+        }
+        .login-container button {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-top: 1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .login-container button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .login-container p {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+        .login-container a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+        }
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 1.5rem;
+                max-width: 90%;
+            }
+            header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-shoe-prints"></i> Np Store</h1>
+        <a href="index.html"><i class="fas fa-home"></i> Back to Home</a>
+    </header>
+    <div class="login-container">
+        <h2>Welcome Back!</h2>
+        <p>Please log in to your account to continue shopping.</p>
+        <form onsubmit="handleLogin(event)">
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" placeholder="Email Address" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" placeholder="Password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <p>Forgot your password? <a href="#">Reset it here</a></p>
+        <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+    </div>
+    <footer>
+        <p>&copy; 2023 Np Store. All rights reserved.</p>
+    </footer>
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            // Mock login success - in a real app, validate credentials via API
+            alert('Login successful! Redirecting to home...');
+            window.location.href = 'index.html'; // Redirect to main page
+        }
+    </script>
+</body>
+</html>
