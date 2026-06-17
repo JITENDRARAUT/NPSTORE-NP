@@ -2,7 +2,6 @@
 
 A modern, clean, and fully responsive e-commerce web application storefront. This project focuses on building an intuitive user interface for online shopping, complete with structured navigation and user authentication templates.
 
-🚀 **[Live Demo](https://jitendraraut.github.io/NPSTORE-NP/)**
 
 ---
 
