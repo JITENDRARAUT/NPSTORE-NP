@@ -5,7 +5,7 @@ A modern, clean, and fully responsive e-commerce web application storefront. Thi
 
 ----------
 
-## ✨ Features 
+## ✨ Features  
 
 *   🛍️ **Interactive Storefront:** Clean layout designed for viewing products seamlessly across desktop and mobile devices.
 *   🔐 **User Authentication Pages:** Pre-built interfaces for both User Sign-Up (`signup.html`) and Secure Login (`login.html`).
